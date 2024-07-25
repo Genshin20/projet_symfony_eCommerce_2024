@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 #[Route('/admin/users', name: 'admin.users')]
 class UserController extends AbstractController{
@@ -23,15 +24,18 @@ class UserController extends AbstractController{
     #[Route('/', name:'.index', methods:'GET')]
     public function index(UserRepository $repo): Response
     {
-        return $this->render('Backend/User/index.html.twig', [
+        return $this->render('Backend/Users/index.html.twig', [
             //recupere tous les les utilisateurs de la base de donnee on utilise findAll du repository
             'users' => $repo->findAll(),
         ]);
-    }    
+    }  
+  
     #[Route('/{id}/update', name: '.update', methods:['GET', 'POST'])]
-    public function update(?User $user, Request $request): Response{
+    //? si lid ne correspond pas
+    public function update(?User $user, Request $request): Response|RedirectResponse{
 
      if(!$user){
+        
          $this->addFlash('error', 'Utilisateur introuvable');
          return $this->redirectToRoute('admin.users.index');
     }
@@ -50,7 +54,9 @@ class UserController extends AbstractController{
 
         }
                 
-
+        return $this->render('Backend/Users/update.html.twig', [
+            'form' => $form,
+        ]);
   }
     
 }
