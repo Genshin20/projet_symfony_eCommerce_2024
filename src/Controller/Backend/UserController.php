@@ -19,10 +19,12 @@ class UserController extends AbstractController{
     ){
 
     }
+    // methode GET car on ne soumet pas de formulaire o
     #[Route('/', name:'.index', methods:'GET')]
     public function index(UserRepository $repo): Response
     {
         return $this->render('Backend/User/index.html.twig', [
+            //recupere tous les les utilisateurs de la base de donnee on utilise findAll du repository
             'users' => $repo->findAll(),
         ]);
     }    

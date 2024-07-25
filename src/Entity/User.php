@@ -49,6 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 10, nullable: true)]
     #[Assert\Regex(
         pattern: '/^(?:(?:+|00)33[\s.-]?[67]|0[\s.-]?[67])(?:[\s.-]*\d{2}){4}$/',
+
     message: 'Invalid phone number'
     )] 
 
@@ -150,6 +151,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->lastName;
     }
+    
 
     public function setLastName(?string $lastName): static
     {
@@ -158,6 +160,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getFullName()
+    {
+        return "$this->firstName $this->lastName";
+    }
     public function getTelephone(): ?string
     {
         return $this->telephone;
