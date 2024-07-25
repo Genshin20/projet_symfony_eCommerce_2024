@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Les Genres
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="class container mt-2">
+		<h1 class="text-center">Administrations des Genres</h1>
+
+		<table class="mt-4">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Genre</th>
+					<th>Enable</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for gender in genders %}
+					<tr>
+						<td>{{ gender.id}}</td>
+						<td>{{ gender.genre}}</td>
+						<td>{{ gender.enable ? 'Actif' : 'Inactif'}}</td>
+					</tr>
+
+					{# <a href=""></a> #}
+
+
+				{% endfor %}
+			</tbody>
+
+		</table>
+	</section>
+{% endblock %}
