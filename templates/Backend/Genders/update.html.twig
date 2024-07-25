@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Modifier le genre
+{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+<h1>Modifier le genre</h1>
+{{ form_widget(form) }}
+
+<button type="submit">Modifier</button>
+{{ form_end(form) }}
+   
+{% endblock %}

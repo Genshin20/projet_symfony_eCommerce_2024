@@ -34,6 +34,17 @@ class Gender
         return $this->name;
     }
 
+    // public function getGenre(): ?string
+    // {
+    //     return $this->genre;
+    // }
+
+    // public function setGenre(?string $genre): static
+    // {
+    //     $this->genre = $genre;
+
+    //     return $this;
+    // }
     public function setName(string $name): static
     {
         $this->name = $name;

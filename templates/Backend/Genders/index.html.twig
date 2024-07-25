@@ -17,21 +17,23 @@
 					<th>Enable</th>
 				</tr>
 			</thead>
-
 			<tbody>
 				{% for gender in genders %}
 					<tr>
 						<td>{{ gender.id}}</td>
-						<td>{{ gender.genre}}</td>
+						<td>{{ gender.name}}</td>
 						<td>{{ gender.enable ? 'Actif' : 'Inactif'}}</td>
 					</tr>
+					<td>
+						<div class="cell-flex">
+							<a href="{{ path('admin.genders.update', {id: gender.id}) }}">Modifier</a>
+							{%  include 'Backend/Genders/_form.html.twig' %}
 
-					{# <a href=""></a> #}
+						</div>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
 
-
-				{% endfor %}
-			</tbody>
-
-		</table>
-	</section>
-{% endblock %}
+	</table>
+</section>{% endblock %}
