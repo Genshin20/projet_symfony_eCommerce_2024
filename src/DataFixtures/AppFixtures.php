@@ -20,12 +20,12 @@ class AppFixtures extends Fixture
         $user = (new User)
         ->setEmail('admin@test.com')
         ->setRoles(['ROLE_ADMIN'])
-        ->setFirstName('philo')
+        ->setFirstName('Philomene')
         ->setLastName('Faye')
         ->setTelephone('2020202020')
-        ->setBirthDate(new \DateTime('02/20/1988'))
+        ->setBirthDate(new \DateTime('20/02/1988'))
         ->setPassword(
-            $this->hasher->hashPassword( new User, 'Test1234')
+            $this->hasher->hashPassword( new User, 'Test1234') 
         );
       
 
