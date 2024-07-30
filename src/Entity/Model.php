@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ModelRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Model
 {
     #[ORM\Id]
@@ -17,27 +18,29 @@ class Model
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Length
-    (max: 255, maxMessage: 'le nom ne pourras jamais dépasser {{ limit }} caractéres'
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'le nom ne pourras jamais dépasser {{ limit }} caractéres'
     )]
 
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Length
-    (max: 255, maxMessage: 'le slugs ne pourras jamais dépasser {{ limit }} caractéres'
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'le slugs ne pourras jamais dépasser {{ limit }} caractéres'
     )]
     private ?string $slug = null;
 
     #[ORM\Column]
     private ?bool $enable = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $CreatedAt = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $CreatedAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $UpdatedAt = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $UpdatedAt = null;
 
     public function getId(): ?int
     {
@@ -80,26 +83,44 @@ class Model
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->CreatedAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $CreatedAt): static
+    public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
     {
         $this->CreatedAt = $CreatedAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    #[ORM\PrePersist]
+    public function autoSetCreatedAt(): static
+    {
+        if (!$this->CreatedAt) {
+            $this->CreatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->UpdatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $UpdatedAt): static
+    public function setUpdatedAt(?\DateTimeImmutable $UpdatedAt): static
     {
         $this->UpdatedAt = $UpdatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PreUpdate]
+    public function autoSetUpdatedAt(): static
+    {
+        $this->UpdatedAt = new \DateTimeImmutable();
 
         return $this;
     }

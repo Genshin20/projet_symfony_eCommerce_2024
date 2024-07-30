@@ -28,14 +28,14 @@
 						<td>{{ model.name}}</td>
                          <td>{{model.slug}}</td>
 						<td>{{ model.enable ? 'Actif' : 'Inactif'}}</td>
-                        <td>{{model.createdAt}}</td>
-                        <td>{{model.updatedAt}}</td>
+                        <td>{{model.createdAt|date('Y-m-d H:i:s')}}</td>
+                        <td>{{model.updatedAt|date('Y-m-d H:i:s')}}</td>
                        
 					</tr>
 					<td>
 						<div class="cell-flex">
 							<a href="{{ path('admin.model.update', {id: model.id}) }}">Modifier</a>
-							{%  include 'Backend/Models/_form.html.twig' %}
+							{# {%  include 'Backend/Models/_form.html.twig' %} #}
 
 						</div>
 					</td>

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Création d'un Model
+    
+{% endblock %}
+
+{% block body %}
+<h1>Création d'un Model</h1>
+ {{ form_start(form) }}
+ {# affiche formulaire #}
+
+  {{ form_widget(form) }}
+  <button type ="submit">Créer</button>
+  {{ form_end(form) }}
+    
+{% endblock %}
