@@ -34,8 +34,9 @@
 					</tr>
 					<td>
 						<div class="cell-flex">
-							<a href="{{ path('admin.model.update', {id: model.id}) }}">Modifier</a>
-							{# {%  include 'Backend/Models/_form.html.twig' %} #}
+							<a href="{{ path('admin.model.update', {id: model.id}) }}" class="btn btn-success">Modifier</a>
+                            {# <button type="submit" ></button> #}
+							 {%  include 'Backend/Models/_delete.form.html.twig' %} 
 
 						</div>
 					</td>
