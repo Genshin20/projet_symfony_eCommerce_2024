@@ -1,0 +1,8 @@
+{{form_start(form,{attr: {class: 'card w-50 mx-auto'}}
+)}}
+{# affichage formulaire #}
+{{ form_widget(form) }}
+{# bouton submit #}
+<button type="submit" class=" btn btn-success">{{ buttonLabel|default('save') }}</button>
+{# ferme la balise form #}
+{{ form_end(form) }}
